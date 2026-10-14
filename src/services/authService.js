@@ -1,18 +1,10 @@
 import axios from "axios";
 
-function getAuthApiUrl() {
-  const apiUrl = process.env.NEXT_PUBLIC_CATEGORY_URL?.replace(/\/$/, "");
-
-  if (!apiUrl) {
-    throw new Error("The authentication API URL is not configured.");
-  }
-
-  return apiUrl;
-}
+const authApiUrl = "/api";
 
 export async function loginUser(credentials) {
   const response = await axios.post(
-    `${getAuthApiUrl()}/auth/login`,
+    `${authApiUrl}/auth/login`,
     credentials,
     { withCredentials: true },
   );
@@ -22,7 +14,7 @@ export async function loginUser(credentials) {
 
 export async function registerUser(userData) {
   const response = await axios.post(
-    `${getAuthApiUrl()}/auth/signup`,
+    `${authApiUrl}/auth/signup`,
     userData,
     { withCredentials: true },
   );
@@ -32,7 +24,7 @@ export async function registerUser(userData) {
 
 export async function verifyOtp(email, otp) {
   const response = await axios.post(
-    `${getAuthApiUrl()}/auth/verify-otp`,
+    `${authApiUrl}/auth/verify-otp`,
     { email: email.trim().toLowerCase(), otp },
     { withCredentials: true },
   );
@@ -41,7 +33,7 @@ export async function verifyOtp(email, otp) {
 }
 
 export async function getCurrentUser() {
-  const response = await axios.get(`${getAuthApiUrl()}/auth/me`, {
+  const response = await axios.get(`${authApiUrl}/auth/me`, {
     withCredentials: true,
   });
 
@@ -53,7 +45,7 @@ export async function getCurrentUser() {
 }
 
 export async function logoutUser() {
-  const response = await axios.get(`${getAuthApiUrl()}/auth/logout/user`, {
+  const response = await axios.get(`${authApiUrl}/auth/logout/user`, {
     withCredentials: true,
   });
 
