@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import AuthField from "./AuthField.jsx";
 import AuthFeedback from "./AuthFeedback.jsx";
@@ -15,11 +14,10 @@ function getDashboardRoute(role) {
   const normalizedRole = role === "user" ? "customer" : role;
   return ["admin", "manager", "customer"].includes(normalizedRole)
     ? `/${normalizedRole}`
-    : "/customer";
+    : null;
 }
 
 export default function LoginForm() {
-  const router = useRouter();
   const [form, setForm] = useState({ email: "", password: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState("");
@@ -41,7 +39,13 @@ export default function LoginForm() {
       const result = await loginUser(form);
       if (result.success) {
         const route = getDashboardRoute(result.data?.role);
-        router.replace(route);
+        if (!route) {
+          setError("Login succeeded, but the server returned an unsupported account role.");
+          return;
+        }
+
+        window.location.assign(route);
+        return;
       }
       setMessage(result.message);
     } catch (submitError) {
