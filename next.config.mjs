@@ -1,10 +1,8 @@
 /** @type {import('next').NextConfig} */
-const authApiUrl = (
-  process.env.AUTH_API_URL ||
-  (process.env.NODE_ENV === "production"
+const authApiUrl =
+  process.env.NODE_ENV === "production"
     ? "https://jwt-backend-h1xe.onrender.com"
-    : "http://localhost:5000")
-).replace(/\/$/, "");
+    : (process.env.AUTH_API_URL || "http://localhost:5000").replace(/\/$/, "");
 
 const nextConfig = {
   async rewrites() {
