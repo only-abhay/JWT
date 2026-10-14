@@ -2,7 +2,7 @@
 const authApiUrl = (
   process.env.AUTH_API_URL ||
   (process.env.NODE_ENV === "production"
-    ? "https://nestro-backend-5ghj.onrender.com"
+    ? "https://jwt-backend-h1xe.onrender.com"
     : "http://localhost:5000")
 ).replace(/\/$/, "");
 
