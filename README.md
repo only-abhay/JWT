@@ -12,7 +12,7 @@ The `/api` route is proxied to `http://localhost:5000` during local development.
 ## Deploy to Vercel
 
 - Set the Vercel project root directory to `my-app`.
-- Set the production environment variable `AUTH_API_URL` to `https://nestro-backend-5ghj.onrender.com`.
+- Set the production environment variable `AUTH_API_URL` to `https://jwt-backend-h1xe.onrender.com`.
 - Redeploy after setting the environment variable.
 
 Authentication requests use the same-origin `/api` proxy. This lets the browser store the HTTP-only authentication cookie on the frontend domain while Next.js forwards API requests to the backend.
